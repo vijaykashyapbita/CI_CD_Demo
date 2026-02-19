@@ -35,10 +35,10 @@ jobs:
       - name: Deploy to DEV
         if: github.event_name == 'push'
         run: |
-          databricks workspace import notebook.py /Users/${{ github.actor }}/dev/notebook --overwrite
+          databricks workspace import demo.py /Users/${{ github.actor }}/dev/demo --overwrite
 
       # ---------------- PROD DEPLOYMENT ----------------
       - name: Deploy to PROD
         if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.event.pull_request.merged == true
         run: |
-          databricks workspace import notebook.py /Users/${{ github.actor }}/prod/notebook --overwrite
+          databricks workspace import demo.py /Users/${{ github.actor }}/prod/demo --overwrite
