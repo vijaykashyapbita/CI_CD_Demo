@@ -26,10 +26,12 @@ jobs:
           databricks version
 
       # ---------------- SET ENV VARIABLES ----------------
-      - name: Set Databricks Environment
+      - name: Configure Databricks
         run: |
-          echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
-          echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
+          databricks configure --token <<EOF
+          ${{ secrets.DATABRICKS_HOST }}
+          ${{ secrets.DATABRICKS_TOKEN }}
+          EOF
 
       # ---------------- DEV DEPLOYMENT ----------------
       - name: Deploy to DEV Workspace
